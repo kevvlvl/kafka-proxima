@@ -17,7 +17,7 @@ public class PriceResource {
      * In-Memory reactive stream
      */
     @Inject
-    @Channel("my-data-stream")
+    @Channel("price-cad-data")
     Publisher<Double> prices;
 
     /**

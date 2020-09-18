@@ -1,12 +1,14 @@
 package org.kevvlvl.kafkaproxima.stream;
 
 import io.reactivex.Flowable;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @ApplicationScoped
 public class PriceGenerator {
 
@@ -19,6 +21,9 @@ public class PriceGenerator {
      */
     @Outgoing("generated-price")
     public Flowable<Integer> generate() {
+
+        log.info("generate() - Initiate generation of a random number");
+
         return Flowable.interval(5, TimeUnit.SECONDS)
                 .map(tick -> random.nextInt(100));
     }

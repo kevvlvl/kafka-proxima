@@ -13,10 +13,16 @@ import javax.ws.rs.core.MediaType;
 @Path("/prices")
 public class PriceResource {
 
+    /**
+     * In-Memory reactive stream
+     */
     @Inject
     @Channel("my-data-stream")
     Publisher<Double> prices;
 
+    /**
+     * @return the value of the stream my-data-stream to subscribers of this API's publisher
+     */
     @GET
     @Path("/stream")
     @Produces(MediaType.SERVER_SENT_EVENTS)

@@ -25,6 +25,10 @@ public class CountryResource {
     @Channel("countries-create")
     Emitter<String> countryEmitter;
 
+    @Inject
+    @Channel("countries-delete")
+    Emitter<String> countryRemoveEmitter;
+
     @GET
     @Path("/stream")
     @Produces(MediaType.SERVER_SENT_EVENTS)
@@ -35,9 +39,18 @@ public class CountryResource {
 
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
-    public void addCountries(String country) {
+    public void addCountry(String country) {
 
-        log.info("addCountries() - Received country {}", country);
+        log.info("addCountry() - Received country {}", country);
         countryEmitter.send(country);
+    }
+
+    @POST
+    @Path("/remove")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public void removeCountry(String country) {
+
+        log.info("removeCountry() - Received country {}", country);
+        countryRemoveEmitter.send(country);
     }
 }

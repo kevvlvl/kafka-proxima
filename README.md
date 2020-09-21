@@ -14,7 +14,9 @@ See Quarkus' documentation as follows: https://quarkus.io/guides/kafka
 
 ### Testing it
 
-1. Open your browser to http://localhost:8080/prices where we read from two kafka topics
+1. Open your browser to http://localhost:8080/dashboard.html where we read from two kafka topics
 2. To update countries (push to kafka topic), use the following POST curl:
  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "Canada,USA"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "USA"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "Canada"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries/remove -d "USA"

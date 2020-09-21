@@ -15,16 +15,16 @@ See Quarkus' documentation as follows: https://quarkus.io/guides/kafka
 ### Testing it
 
 1. Open your browser to http://localhost:8080/dashboard.html where we read from two kafka topics
-2. To update countries (push to kafka topic), use the following POST curl:
+2. To update countries (push add/remove changes & update kafka topic), use the following POSTs:
  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "USA"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "Canada"
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries/remove -d "USA"
+* curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "USA"
+* curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "Canada"
+* curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries/remove -d "USA"
 
 ### Health Endpoints
 
 Microprofile Health endpoints
 
-http://localhost:8080/health/live - The application is up and running.
-http://localhost:8080/health/ready - The application is ready to serve requests.
-http://localhost:8080/health - Accumulating all health check procedures in the application.
+* http://localhost:8080/health/live - The application is up and running.
+* http://localhost:8080/health/ready - The application is ready to serve requests.
+* http://localhost:8080/health - Accumulating all health check procedures in the application.

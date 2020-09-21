@@ -14,12 +14,12 @@ public class CountryService {
     private List<String> countriesList;
 
     @PostConstruct
-    private void init() {
+    public void init() {
         this.countriesList = new ArrayList<>();
     }
 
     @PreDestroy
-    private void destroy() {
+    public void destroy() {
         this.countriesList.clear();
     }
 

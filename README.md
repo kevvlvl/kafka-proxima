@@ -20,3 +20,11 @@ See Quarkus' documentation as follows: https://quarkus.io/guides/kafka
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "USA"
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries -d "Canada"
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -X POST -H 'Content-Type: text/plain' http://localhost:8080/countries/remove -d "USA"
+
+### Health Endpoints
+
+Microprofile Health endpoints
+
+http://localhost:8080/health/live - The application is up and running.
+http://localhost:8080/health/ready - The application is ready to serve requests.
+http://localhost:8080/health - Accumulating all health check procedures in the application.

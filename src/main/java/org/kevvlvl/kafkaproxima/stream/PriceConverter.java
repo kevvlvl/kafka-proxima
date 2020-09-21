@@ -13,7 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 public class PriceConverter {
 
     @ConfigProperty(name = "application.usd-cad-rate")
-    private double conversionRate;
+    double conversionRate;
 
     /**
      * Reads the numbers received in the topic "prices" and outputs the converted number in the Outgoing stream to all subscribers (Broadcast annotation)

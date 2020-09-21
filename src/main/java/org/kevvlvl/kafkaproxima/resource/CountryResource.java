@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.resteasy.annotations.SseElementType;
+import org.kevvlvl.kafkaproxima.util.Constants;
 import org.reactivestreams.Publisher;
 
 import javax.inject.Inject;
@@ -22,12 +23,8 @@ public class CountryResource {
     Publisher<String> countries;
 
     @Inject
-    @Channel("countries-create")
+    @Channel("countries-update")
     Emitter<String> countryEmitter;
-
-    @Inject
-    @Channel("countries-delete")
-    Emitter<String> countryRemoveEmitter;
 
     @GET
     @Path("/stream")
@@ -39,18 +36,24 @@ public class CountryResource {
 
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public void addCountry(String country) {
 
         log.info("addCountry() - Received country {}", country);
-        countryEmitter.send(country);
+        countryEmitter.send(getCountryWithAction(Constants.ACTION_ADD, country));
     }
 
     @POST
     @Path("/remove")
     @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public void removeCountry(String country) {
 
         log.info("removeCountry() - Received country {}", country);
-        countryRemoveEmitter.send(country);
+        countryEmitter.send(getCountryWithAction(Constants.ACTION_REMOVE, country));
+    }
+
+    private String getCountryWithAction(String action, String country) {
+        return action + Constants.ACTION_SEPARATOR + country;
     }
 }

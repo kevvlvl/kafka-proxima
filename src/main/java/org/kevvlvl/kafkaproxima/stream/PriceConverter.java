@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
+import org.kevvlvl.kafkaproxima.model.Price;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -17,16 +18,18 @@ public class PriceConverter {
 
     /**
      * Reads the numbers received in the topic "prices" and outputs the converted number in the Outgoing stream to all subscribers (Broadcast annotation)
-     * @param priceInUsd
+     * @param price
      * @return
      */
     @Incoming("prices")
     @Outgoing("price-cad-data")
     @Broadcast
-    public double process(int priceInUsd) {
+    public Price process(Price price) {
 
-        log.info("process() - price to convert {}", priceInUsd);
+        log.info("process() - price to convert {}", price);
 
-        return priceInUsd * conversionRate;
+        price.setPriceCad(price.getPriceUsd() * conversionRate);
+
+        return price;
     }
 }

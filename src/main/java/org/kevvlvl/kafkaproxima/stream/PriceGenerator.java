@@ -3,6 +3,7 @@ package org.kevvlvl.kafkaproxima.stream;
 import io.reactivex.Flowable;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
+import org.kevvlvl.kafkaproxima.model.Price;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.Random;
@@ -20,11 +21,15 @@ public class PriceGenerator {
      * @return
      */
     @Outgoing("generated-price")
-    public Flowable<Integer> generate() {
+    public Flowable<Price> generate() {
 
         log.info("generate() - Initiate generation of a random number");
+        Price p = new Price();
 
         return Flowable.interval(5, TimeUnit.SECONDS)
-                .map(tick -> random.nextInt(100));
+                .map(tick -> {
+                    p.setPriceUsd(random.nextInt(100));
+                    return p;
+                });
     }
 }

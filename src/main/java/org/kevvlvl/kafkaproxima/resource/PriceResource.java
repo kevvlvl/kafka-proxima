@@ -2,6 +2,7 @@ package org.kevvlvl.kafkaproxima.resource;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.jboss.resteasy.annotations.SseElementType;
+import org.kevvlvl.kafkaproxima.model.Price;
 import org.reactivestreams.Publisher;
 
 import javax.inject.Inject;
@@ -18,7 +19,7 @@ public class PriceResource {
      */
     @Inject
     @Channel("price-cad-data")
-    Publisher<Double> prices;
+    Publisher<Price> prices;
 
     /**
      * @return the value of the stream my-data-stream to subscribers of this API's publisher
@@ -27,7 +28,7 @@ public class PriceResource {
     @Path("/stream")
     @Produces(MediaType.SERVER_SENT_EVENTS)
     @SseElementType("text/plain")
-    public Publisher<Double> stream() {
+    public Publisher<Price> stream() {
         return prices;
     }
 }
